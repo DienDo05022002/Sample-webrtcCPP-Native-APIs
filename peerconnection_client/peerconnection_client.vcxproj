@@ -108,7 +108,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\libs\webrtc_m74\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)nvcodec;$(ProjectDir)..\libs\webrtc_m74\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>webrtc.lib;d3d9.lib;dmoguids.lib;wmcodecdspuuid.lib;winmm.lib;crypt32.lib;iphlpapi.lib;secur32.lib;amstrmid.lib;msdmo.lib;d3d11.lib;dxgi.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -141,7 +141,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\libs\webrtc_m74\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)nvcodec;$(ProjectDir)..\libs\webrtc_m74\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>webrtc.lib;d3d9.lib;dmoguids.lib;wmcodecdspuuid.lib;winmm.lib;crypt32.lib;iphlpapi.lib;secur32.lib;amstrmid.lib;msdmo.lib;d3d11.lib;dxgi.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -157,6 +157,9 @@
     <ClCompile Include="jsoncpp\json_writer.cpp" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="main_wnd.cc" />
+    <ClCompile Include="nvcodec\nvenc.cpp" />
+    <ClCompile Include="nvcodec\NvEncoder\NvEncoder.cpp" />
+    <ClCompile Include="nvcodec\NvEncoder\NvEncoderD3D11.cpp" />
     <ClCompile Include="peer_connection_client.cc" />
     <ClCompile Include="test_video_capturer.cc" />
     <ClCompile Include="vcm_capturer.cc" />
@@ -181,6 +184,11 @@
     <ClInclude Include="jsoncpp\json_batchallocator.h" />
     <ClInclude Include="jsoncpp\json_tool.h" />
     <ClInclude Include="main_wnd.h" />
+    <ClInclude Include="nvcodec\encoder_info.h" />
+    <ClInclude Include="nvcodec\nvenc.h" />
+    <ClInclude Include="nvcodec\NvEncoder\nvEncodeAPI.h" />
+    <ClInclude Include="nvcodec\NvEncoder\NvEncoder.h" />
+    <ClInclude Include="nvcodec\NvEncoder\NvEncoderD3D11.h" />
     <ClInclude Include="peer_connection_client.h" />
     <ClInclude Include="test_video_capturer.h" />
     <ClInclude Include="vcm_capturer.h" />
