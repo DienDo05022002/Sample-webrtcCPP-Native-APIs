@@ -75,6 +75,9 @@
     <ClCompile Include="nvcodec\NvEncoder\NvEncoderD3D11.cpp">
       <Filter>源文件\nvcodec\NvEncoder</Filter>
     </ClCompile>
+    <ClCompile Include="external_decoder.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="conductor.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="nvcodec\NvEncoder\NvEncoderD3D11.h">
       <Filter>源文件\nvcodec\NvEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="external_decoder.h">
+      <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

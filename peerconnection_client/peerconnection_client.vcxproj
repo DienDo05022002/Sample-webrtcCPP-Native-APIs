@@ -149,6 +149,7 @@
     <ClCompile Include="conductor.cc" />
     <ClCompile Include="d3d9_render.cc" />
     <ClCompile Include="defaults.cc" />
+    <ClCompile Include="external_decoder.cc" />
     <ClCompile Include="ffmpeg_video_decoder_factory.cc" />
     <ClCompile Include="field_trial.cc" />
     <ClCompile Include="json.cc" />
@@ -168,6 +169,7 @@
     <ClInclude Include="conductor.h" />
     <ClInclude Include="d3d9_render.h" />
     <ClInclude Include="defaults.h" />
+    <ClInclude Include="external_decoder.h" />
     <ClInclude Include="ffmpeg_video_decoder_factory.h" />
     <ClInclude Include="field_trial.h" />
     <ClInclude Include="flag_defs.h" />
