@@ -206,8 +206,7 @@ static bool nvenc_init(void *nvenc_data, void *encoder_config)
 	initializeParams.maxEncodeHeight = enc->height;
 	initializeParams.frameRateNum = enc->framerate;
 	initializeParams.encodeConfig->gopLength = enc->gop;
-
-	initializeParams.encodeConfig->rcParams.averageBitRate = enc->bitrate * 5 / 6;
+	initializeParams.encodeConfig->rcParams.averageBitRate = enc->bitrate ;
 	initializeParams.encodeConfig->rcParams.maxBitRate = enc->bitrate;
 	//initializeParams.encodeConfig->rcParams.vbvBufferSize = enc->bitrate; // / (initializeParams.frameRateNum / initializeParams.frameRateDen);
 	//initializeParams.encodeConfig->rcParams.vbvInitialDelay = initializeParams.encodeConfig->rcParams.vbvInitialDelay;
@@ -218,7 +217,7 @@ static bool nvenc_init(void *nvenc_data, void *encoder_config)
 	return true;
 }
 
-int nvenc_encode_texture(void *nvenc_data, ID3D11Texture2D *texture, uint8_t* buf, uint32_t maxBufSize)
+int nvenc_encode_texture(void *nvenc_data, ID3D11Texture2D *texture, std::vector<std::vector<uint8_t>>& out_packets)
 {
 	if (nvenc_data == nullptr)
 	{
@@ -233,30 +232,22 @@ int nvenc_encode_texture(void *nvenc_data, ID3D11Texture2D *texture, uint8_t* bu
 		return -1;
 	}
 
-	std::vector<std::vector<uint8_t>> vPacket;
 	const NvEncInputFrame* encoderInputFrame = enc->nvenc->GetNextInputFrame();
 	ID3D11Texture2D *pTexBgra = reinterpret_cast<ID3D11Texture2D*>(encoderInputFrame->inputPtr);
 	enc->context->CopyResource(pTexBgra, texture);
-	enc->nvenc->EncodeFrame(vPacket);
+	enc->nvenc->EncodeFrame(out_packets);
 
 	int frameSize = 0;
-	for (std::vector<uint8_t> &packet : vPacket)
+	for (std::vector<uint8_t> &packet : out_packets)
 	{
-		if (frameSize + packet.size() < maxBufSize)
-		{
-			memcpy(buf+frameSize, packet.data(), packet.size());
-			frameSize += (int)packet.size();
-		}
-		else
-		{
-			break;
-		}
+		frameSize += (int)packet.size();
 	}
 
 	return frameSize;
 }
 
-int nvenc_encode_handle(void *nvenc_data, HANDLE handle, int lock_key, int unlock_key, uint8_t* buf, uint32_t maxBufSize)
+int nvenc_encode_handle(void *nvenc_data, HANDLE handle, int lock_key, int unlock_key, 
+	std::vector<std::vector<uint8_t>>& out_packet)
 {
 	if (nvenc_data == nullptr || handle == nullptr)
 	{
@@ -307,11 +298,79 @@ int nvenc_encode_handle(void *nvenc_data, HANDLE handle, int lock_key, int unloc
 		{
 			return -1;
 		}
-		frameSize = nvenc_encode_texture(enc, inputTexture, buf, maxBufSize);
+		frameSize = nvenc_encode_texture(enc, inputTexture, out_packet);
 		keyedMutex->ReleaseSync(unlock_key);
 	}
 
 	return frameSize;
+}
+
+int nvenc_set_bitrate(void *nvenc_data, uint32_t bitrate_bps)
+{
+	if (nvenc_data == nullptr)
+	{
+		return 0;
+	}
+
+	struct nvenc_data *enc = (struct nvenc_data *)nvenc_data;
+	std::lock_guard<std::mutex> locker(enc->mutex);
+	if (enc->nvenc != nullptr)
+	{
+		NV_ENC_RECONFIGURE_PARAMS reconfigureParams;
+		NV_ENC_CONFIG encodeConfig = { NV_ENC_CONFIG_VER };
+		reconfigureParams.version = NV_ENC_RECONFIGURE_PARAMS_VER;
+		reconfigureParams.forceIDR = true;
+		reconfigureParams.reInitEncodeParams = { NV_ENC_INITIALIZE_PARAMS_VER };
+		reconfigureParams.reInitEncodeParams.encodeConfig = &encodeConfig;
+		enc->nvenc->GetInitializeParams(&reconfigureParams.reInitEncodeParams);
+		reconfigureParams.reInitEncodeParams.encodeConfig->rcParams.averageBitRate = bitrate_bps;
+		reconfigureParams.reInitEncodeParams.encodeConfig->rcParams.maxBitRate = bitrate_bps;
+		enc->nvenc->Reconfigure(&reconfigureParams);
+	}
+
+	return 0;
+}
+
+int nvenc_set_framerate(void *nvenc_data, uint32_t framerate) 
+{
+	if (nvenc_data == nullptr)
+	{
+		return 0;
+	}
+
+	struct nvenc_data *enc = (struct nvenc_data *)nvenc_data;
+	std::lock_guard<std::mutex> locker(enc->mutex);
+	if (enc->nvenc != nullptr)
+	{
+		NV_ENC_RECONFIGURE_PARAMS reconfigureParams;
+		NV_ENC_CONFIG encodeConfig = { NV_ENC_CONFIG_VER };
+		reconfigureParams.version = NV_ENC_RECONFIGURE_PARAMS_VER;
+		reconfigureParams.forceIDR = true;
+		reconfigureParams.reInitEncodeParams = { NV_ENC_INITIALIZE_PARAMS_VER };
+		reconfigureParams.reInitEncodeParams.encodeConfig = &encodeConfig;
+		enc->nvenc->GetInitializeParams(&reconfigureParams.reInitEncodeParams);
+		reconfigureParams.reInitEncodeParams.frameRateNum = framerate;
+		enc->nvenc->Reconfigure(&reconfigureParams);
+	}
+
+	return 0;
+}
+
+int nvenc_request_idr(void *nvenc_data)
+{
+	if (nvenc_data == nullptr)
+	{
+		return 0;
+	}
+
+	struct nvenc_data *enc = (struct nvenc_data *)nvenc_data;
+	std::lock_guard<std::mutex> locker(enc->mutex);
+	if (enc->nvenc != nullptr)
+	{
+		enc->nvenc->ForceIDR();
+	}
+
+	return 0;
 }
 
 int nvenc_get_sequence_params(void *nvenc_data, uint8_t* buf, uint32_t maxBufSize)
@@ -385,6 +444,9 @@ struct encoder_info nvenc_info = {
 	nvenc_init,
 	nvenc_encode_texture,
 	nvenc_encode_handle,
+	nvenc_set_bitrate,
+	nvenc_set_framerate,
+	nvenc_request_idr,
 	nvenc_get_sequence_params,
 	get_device,
 	get_texture,

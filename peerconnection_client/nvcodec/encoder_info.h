@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <string>
+#include <vector>
 #include <dxgi.h>
 #include <d3d11.h>
 
@@ -23,8 +24,11 @@ struct encoder_info
 	void* (*create)(void);
 	void (*destroy)(void **encoder_data);
 	bool (*init)(void *encoder_data, void *encoder_config);
-	int (*encode_texture)(void *nvenc_data, ID3D11Texture2D *texture, uint8_t* buf, uint32_t maxBufSize);
-	int (*encode_handle)(void *nvenc_data, HANDLE handle, int lock_key, int unlock_key, uint8_t* buf, uint32_t maxBufSize);
+	int (*encode_texture)(void *nvenc_data, ID3D11Texture2D *texture, std::vector<std::vector<uint8_t>>& out_packets);
+	int (*encode_handle)(void *nvenc_data, HANDLE handle, int lock_key, int unlock_key, std::vector<std::vector<uint8_t>>& out_packets);
+	int(*set_bitrate)(void *nvenc_data, uint32_t bitrate_bps);
+	int(*set_framerate)(void *nvenc_data, uint32_t framerate);
+	int(*request_idr)(void *nvenc_data);
 	int(*get_sequence_params)(void *nvenc_data, uint8_t* buf, uint32_t maxBufSize);
 	ID3D11Device* (*get_device)(void *encoder_data);
 	ID3D11Texture2D* (*get_texture)(void *encoder_data);

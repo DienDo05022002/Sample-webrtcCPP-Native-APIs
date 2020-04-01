@@ -45,6 +45,7 @@
 #include "test/vcm_capturer.h"
 
 #include "ffmpeg_video_decoder_factory.h"
+#include "external_video_decoder_factory.h"
 
 namespace {
 // Names used for a IceCandidate JSON object.
@@ -137,7 +138,7 @@ bool Conductor::InitializePeerConnection() {
 	  nullptr /* signaling_thread */, nullptr /* default_adm */,
 	  webrtc::CreateBuiltinAudioEncoderFactory(),
 	  webrtc::CreateBuiltinAudioDecoderFactory(),
-	  webrtc::CreateBuiltinVideoEncoderFactory(),
+	  webrtc::CreateBuiltinExternalVideoEncoderFactory(),/*webrtc::CreateBuiltinVideoEncoderFactory(),*/
 	  webrtc::CreateBuiltinVideoDecoderFactory(), /*ffmpeg::CreateBuiltinVideoDecoderFactory(),*/
 	  nullptr /* audio_mixer */,
       nullptr /* audio_processing */);

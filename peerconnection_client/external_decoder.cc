@@ -25,8 +25,9 @@ int32_t ExternalDecoder::Decode(const webrtc::EncodedImage& input,
 	// Decoding with external decoder
 	// frame info: input.data(), input.size()
 
-	rtc::scoped_refptr<webrtc::I420Buffer> buffer = webrtc::I420Buffer::Create(input._encodedWidth, input._encodedHeight);
-	webrtc::VideoFrame frame = webrtc::VideoFrame::Builder()
+	webrtc::VideoFrame frame =
+		webrtc::VideoFrame::Builder()
+		.set_video_frame_buffer(webrtc::I420Buffer::Create(input._encodedWidth, input._encodedHeight))
 		.set_rotation(webrtc::kVideoRotation_0)
 		.set_timestamp_ms(render_time_ms)
 		.build();
