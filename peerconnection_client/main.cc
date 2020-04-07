@@ -26,10 +26,10 @@ int PASCAL wWinMain(HINSTANCE instance,
 #ifdef _DEBUG
 	AllocConsole();  
 	SetConsoleTitle(L"DebugConsole"); 
-	FILE* temp_file = nullptr;
-	freopen_s(&temp_file, "conin$", "r+t", stdin); 
-	freopen_s(&temp_file, "conout$", "w+t", stdout);
+	freopen("CONOUT$", "w+t", stdout);
+	freopen("CONOUT$", "w+t", stderr);
 #endif
+
   rtc::WinsockInitializer winsock_init;
   rtc::Win32SocketServer w32_ss;
   rtc::Win32Thread w32_thread(&w32_ss);

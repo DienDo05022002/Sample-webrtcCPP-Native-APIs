@@ -327,40 +327,40 @@ void MainWnd::OnPaint() {
 
   ::EndPaint(handle(), &ps);
 
-  //if (ui_ == STREAMING && remote_renderer && local_renderer) {
-	 // AutoLock<VideoRenderer> local_lock(local_renderer);
-	 // AutoLock<VideoRenderer> remote_lock(remote_renderer);
+  /*if (ui_ == STREAMING && remote_renderer && local_renderer) {
+	  AutoLock<VideoRenderer> local_lock(local_renderer);
+	  AutoLock<VideoRenderer> remote_lock(remote_renderer);
 
-	 // const BITMAPINFO& bmi = remote_renderer->bmi();
-	 // int height = abs(bmi.bmiHeader.biHeight);
-	 // int width = bmi.bmiHeader.biWidth;
+	  const BITMAPINFO& bmi = remote_renderer->bmi();
+	  int height = abs(bmi.bmiHeader.biHeight);
+	  int width = bmi.bmiHeader.biWidth;
 
-	 // const uint8_t* image = remote_renderer->image();
-	 // if (image != NULL) {
-		//  if (remote_renderer->buffer_) {
-		//	  static D3D9Render* render = nullptr;
-		//	  static int w = 0, h = 0;
+	  const uint8_t* image = remote_renderer->image();
+	  if (image != NULL) {
+		  if (remote_renderer->buffer_) {
+			  static D3D9Render* render = nullptr;
+			  static int w = 0, h = 0;
 
-		//	  if (render && (w != remote_renderer->buffer_->width()
-		//		  || h != remote_renderer->buffer_->height())) {
-		//		  render->Release();
-		//		  delete render;
-		//		  render = nullptr;
-		//	  }
+			  if (render && (w != remote_renderer->buffer_->width()
+				  || h != remote_renderer->buffer_->height())) {
+				  render->Release();
+				  delete render;
+				  render = nullptr;
+			  }
 
-		//	  if (render == nullptr) {
-		//		  render = new D3D9Render;
-		//		  render->Init(wnd_, remote_renderer->buffer_->width(), remote_renderer->buffer_->height());
-		//		  w = remote_renderer->buffer_->width();
-		//		  h = remote_renderer->buffer_->height();
-		//	  }
+			  if (render == nullptr) {
+				  render = new D3D9Render;
+				  render->Init(wnd_, remote_renderer->buffer_->width(), remote_renderer->buffer_->height());
+				  w = remote_renderer->buffer_->width();
+				  h = remote_renderer->buffer_->height();
+			  }
 
-		//	  if (render) {
-		//		  render->UpdateYUV420(remote_renderer->buffer_.get());
-		//	  }
-		//  }
-	 // }
-  //}
+			  if (render) {
+				  render->UpdateI420(remote_renderer->buffer_.get());
+			  }
+		  }
+	  }
+  }*/
 }
 
 void MainWnd::OnDestroyed() {
