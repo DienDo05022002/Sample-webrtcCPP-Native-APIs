@@ -19,16 +19,18 @@
 #include "system_wrappers/include/field_trial.h"
 #include "test/field_trial.h"
 
+#include <iostream>
+
 int PASCAL wWinMain(HINSTANCE instance,
                     HINSTANCE prev_instance,
                     wchar_t* cmd_line,
                     int cmd_show) {
-#ifdef _DEBUG
+//#ifdef _DEBUG
 	AllocConsole();  
 	SetConsoleTitle(L"DebugConsole"); 
 	freopen("CONOUT$", "w+t", stdout);
 	freopen("CONOUT$", "w+t", stderr);
-#endif
+//#endif
 
   rtc::WinsockInitializer winsock_init;
   rtc::Win32SocketServer w32_ss;

@@ -112,24 +112,30 @@ class CapturerTrackSource : public webrtc::VideoTrackSource {
 
 Conductor::Conductor(PeerConnectionClient* client, MainWindow* main_wnd)
     : peer_id_(-1), loopback_(false), client_(client), main_wnd_(main_wnd) {
-  client_->RegisterObserver(this);
+	printf("Conductor::Conductor\n");
+	client_->RegisterObserver(this);
   main_wnd->RegisterObserver(this);
 }
 
 Conductor::~Conductor() {
+	printf("Conductor::~Conductor\n");
   RTC_DCHECK(!peer_connection_);
 }
 
 bool Conductor::connection_active() const {
+	printf("Conductor::connection_active\n");
   return peer_connection_ != nullptr;
 }
 
 void Conductor::Close() {
+	printf("Conductor::Close\n");
   client_->SignOut();
   DeletePeerConnection();
 }
 
 bool Conductor::InitializePeerConnection() {
+	printf("Conductor::InitializePeerConnection\n");
+
   RTC_DCHECK(!peer_connection_factory_);
   RTC_DCHECK(!peer_connection_);
 
@@ -156,11 +162,13 @@ bool Conductor::InitializePeerConnection() {
   }
 
   AddTracks();
+  
 
   return peer_connection_ != nullptr;
 }
 
 bool Conductor::ReinitializePeerConnectionForLoopback() {
+	printf("Conductor::ReinitializePeerConnectionForLoopback\n");
   loopback_ = true;
   std::vector<rtc::scoped_refptr<webrtc::RtpSenderInterface>> senders =
       peer_connection_->GetSenders();
@@ -176,6 +184,7 @@ bool Conductor::ReinitializePeerConnectionForLoopback() {
 }
 
 bool Conductor::CreatePeerConnection(bool dtls) {
+	printf("Conductor::CreatePeerConnection\n");
   RTC_DCHECK(peer_connection_factory_);
   RTC_DCHECK(!peer_connection_);
 
@@ -192,6 +201,7 @@ bool Conductor::CreatePeerConnection(bool dtls) {
 }
 
 void Conductor::DeletePeerConnection() {
+	printf("Conductor::DeletePeerConnection\n");
   main_wnd_->StopLocalRenderer();
   main_wnd_->StopRemoteRenderer();
   peer_connection_ = nullptr;
@@ -201,6 +211,7 @@ void Conductor::DeletePeerConnection() {
 }
 
 void Conductor::EnsureStreamingUI() {
+	printf("Conductor::EnsureStreamingUI\n");
   RTC_DCHECK(peer_connection_);
   if (main_wnd_->IsWindow()) {
     if (main_wnd_->current_ui() != MainWindow::STREAMING)
@@ -216,6 +227,7 @@ void Conductor::OnAddTrack(
     rtc::scoped_refptr<webrtc::RtpReceiverInterface> receiver,
     const std::vector<rtc::scoped_refptr<webrtc::MediaStreamInterface>>&
         streams) {
+	printf("Conductor::OnAddTrack\n");
   RTC_LOG(INFO) << __FUNCTION__ << " " << receiver->id();
   main_wnd_->QueueUIThreadCallback(NEW_TRACK_ADDED,
                                    receiver->track().release());
@@ -223,11 +235,13 @@ void Conductor::OnAddTrack(
 
 void Conductor::OnRemoveTrack(
     rtc::scoped_refptr<webrtc::RtpReceiverInterface> receiver) {
+	printf("Conductor::OnRemoveTrack\n");
   RTC_LOG(INFO) << __FUNCTION__ << " " << receiver->id();
   main_wnd_->QueueUIThreadCallback(TRACK_REMOVED, receiver->track().release());
 }
 
 void Conductor::OnIceCandidate(const webrtc::IceCandidateInterface* candidate) {
+	printf("Conductor::OnIceCandidate\n");
   RTC_LOG(INFO) << __FUNCTION__ << " " << candidate->sdp_mline_index();
   // For loopback test. To save some connecting delay.
   if (loopback_) {
@@ -256,11 +270,13 @@ void Conductor::OnIceCandidate(const webrtc::IceCandidateInterface* candidate) {
 //
 
 void Conductor::OnSignedIn() {
+	printf("Conductor::OnSignedIn\n");
   RTC_LOG(INFO) << __FUNCTION__;
   main_wnd_->SwitchToPeerList(client_->peers());
 }
 
 void Conductor::OnDisconnected() {
+	printf("Conductor::OnDisconnected\n");
   RTC_LOG(INFO) << __FUNCTION__;
 
   DeletePeerConnection();
@@ -270,6 +286,7 @@ void Conductor::OnDisconnected() {
 }
 
 void Conductor::OnPeerConnected(int id, const std::string& name) {
+	printf("Conductor::OnPeerConnected\n");
   RTC_LOG(INFO) << __FUNCTION__;
   // Refresh the list if we're showing it.
   if (main_wnd_->current_ui() == MainWindow::LIST_PEERS)
@@ -277,6 +294,7 @@ void Conductor::OnPeerConnected(int id, const std::string& name) {
 }
 
 void Conductor::OnPeerDisconnected(int id) {
+	printf("Conductor::OnPeerDisconnected\n");
   RTC_LOG(INFO) << __FUNCTION__;
   if (id == peer_id_) {
     RTC_LOG(INFO) << "Our peer disconnected";
@@ -289,6 +307,7 @@ void Conductor::OnPeerDisconnected(int id) {
 }
 
 void Conductor::OnMessageFromPeer(int peer_id, const std::string& message) {
+	printf("Conductor::OnMessageFromPeer\n");
   RTC_DCHECK(peer_id_ == peer_id || peer_id_ == -1);
   RTC_DCHECK(!message.empty());
 
@@ -389,11 +408,13 @@ void Conductor::OnMessageFromPeer(int peer_id, const std::string& message) {
 }
 
 void Conductor::OnMessageSent(int err) {
+	printf("Conductor::OnMessageSent\n");
   // Process the next pending message if any.
   main_wnd_->QueueUIThreadCallback(SEND_MESSAGE_TO_PEER, NULL);
 }
 
 void Conductor::OnServerConnectionFailure() {
+	printf("Conductor::OnServerConnectionFailure\n");
   main_wnd_->MessageBox("Error", ("Failed to connect to " + server_).c_str(),
                         true);
 }
@@ -403,6 +424,7 @@ void Conductor::OnServerConnectionFailure() {
 //
 
 void Conductor::StartLogin(const std::string& server, int port) {
+	printf("Conductor::StartLogin\n");
   if (client_->is_connected())
     return;
   server_ = server;
@@ -410,11 +432,13 @@ void Conductor::StartLogin(const std::string& server, int port) {
 }
 
 void Conductor::DisconnectFromServer() {
+	printf("Conductor::DisconnectFromServer\n");
   if (client_->is_connected())
     client_->SignOut();
 }
 
 void Conductor::ConnectToPeer(int peer_id) {
+	printf("Conductor::ConnectToPeer\n");
   RTC_DCHECK(peer_id_ == -1);
   RTC_DCHECK(peer_id != -1);
 
@@ -434,6 +458,7 @@ void Conductor::ConnectToPeer(int peer_id) {
 }
 
 void Conductor::AddTracks() {
+	printf("Conductor::AddTracks\n");
   if (!peer_connection_->GetSenders().empty()) {
     return;  // Already added tracks.
   }
@@ -468,6 +493,7 @@ void Conductor::AddTracks() {
 }
 
 void Conductor::DisconnectFromCurrentPeer() {
+	printf("Conductor::DisconnectFromCurrentPeer\n");
   RTC_LOG(INFO) << __FUNCTION__;
   if (peer_connection_.get()) {
     client_->SendHangUp(peer_id_);
@@ -479,6 +505,7 @@ void Conductor::DisconnectFromCurrentPeer() {
 }
 
 void Conductor::UIThreadCallback(int msg_id, void* data) {
+	printf("Conductor::UIThreadCallback\n");
   switch (msg_id) {
     case PEER_CONNECTION_CLOSED:
       RTC_LOG(INFO) << "PEER_CONNECTION_CLOSED";
@@ -546,6 +573,7 @@ void Conductor::UIThreadCallback(int msg_id, void* data) {
 }
 
 void Conductor::OnSuccess(webrtc::SessionDescriptionInterface* desc) {
+	printf("Conductor::OnSuccess\n");
   peer_connection_->SetLocalDescription(
       DummySetSessionDescriptionObserver::Create(), desc);
 
@@ -572,10 +600,12 @@ void Conductor::OnSuccess(webrtc::SessionDescriptionInterface* desc) {
 }
 
 void Conductor::OnFailure(webrtc::RTCError error) {
+	printf("Conductor::OnFailure\n");
   RTC_LOG(LERROR) << ToString(error.type()) << ": " << error.message();
 }
 
 void Conductor::SendMessage(const std::string& json_object) {
+	printf("Conductor::SendMessage\n");
   std::string* msg = new std::string(json_object);
   main_wnd_->QueueUIThreadCallback(SEND_MESSAGE_TO_PEER, msg);
 }
