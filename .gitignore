@@ -2,4 +2,4 @@
 .vs/
 bin/
 webrtc_m74/
-objs/
+objs/x64/Debug
