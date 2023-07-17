@@ -1,191 +1,191 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="源文件">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="头文件">
+    <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="资源文件">
+    <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="源文件\jsoncpp">
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\jsoncpp">
       <UniqueIdentifier>{84db3b44-699a-4244-9e95-f963d6725714}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\nvcodec">
+    <Filter Include="Source Files\nvcodec">
       <UniqueIdentifier>{a6cc9dc9-95bb-47cc-8cdb-af73fea820ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\nvcodec\NvEncoder">
+    <Filter Include="Source Files\nvcodec\NvEncoder">
       <UniqueIdentifier>{f236dc2f-7705-4b16-85c3-e05d5bf2a5a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="conductor.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="defaults.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main_wnd.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="peer_connection_client.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="vcm_capturer.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="test_video_capturer.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="field_trial.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ffmpeg_video_decoder_factory.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="d3d9_render.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="json.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="jsoncpp\json_reader.cpp">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClCompile>
     <ClCompile Include="jsoncpp\json_value.cpp">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClCompile>
     <ClCompile Include="jsoncpp\json_writer.cpp">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClCompile>
     <ClCompile Include="nvcodec\nvenc.cpp">
-      <Filter>源文件\nvcodec</Filter>
+      <Filter>Source Files\nvcodec</Filter>
     </ClCompile>
     <ClCompile Include="nvcodec\NvEncoder\NvEncoder.cpp">
-      <Filter>源文件\nvcodec\NvEncoder</Filter>
+      <Filter>Source Files\nvcodec\NvEncoder</Filter>
     </ClCompile>
     <ClCompile Include="nvcodec\NvEncoder\NvEncoderD3D11.cpp">
-      <Filter>源文件\nvcodec\NvEncoder</Filter>
+      <Filter>Source Files\nvcodec\NvEncoder</Filter>
     </ClCompile>
     <ClCompile Include="external_decoder.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="external_video_decoder_factory.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="nv_encoder.cc">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="conductor.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="defaults.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="flag_defs.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="main_wnd.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="peer_connection_client.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="vcm_capturer.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="test_video_capturer.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="field_trial.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ffmpeg_video_decoder_factory.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="d3d9_render.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json\assertions.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json\autolink.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json\config.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json\features.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json\forwards.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json\json.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json\reader.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json\value.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json\writer.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="json.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json_batchallocator.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="jsoncpp\json_tool.h">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </ClInclude>
     <ClInclude Include="nvcodec\encoder_info.h">
-      <Filter>源文件\nvcodec</Filter>
+      <Filter>Source Files\nvcodec</Filter>
     </ClInclude>
     <ClInclude Include="nvcodec\nvenc.h">
-      <Filter>源文件\nvcodec</Filter>
+      <Filter>Source Files\nvcodec</Filter>
     </ClInclude>
     <ClInclude Include="nvcodec\NvEncoder\nvEncodeAPI.h">
-      <Filter>源文件\nvcodec\NvEncoder</Filter>
+      <Filter>Source Files\nvcodec\NvEncoder</Filter>
     </ClInclude>
     <ClInclude Include="nvcodec\NvEncoder\NvEncoder.h">
-      <Filter>源文件\nvcodec\NvEncoder</Filter>
+      <Filter>Source Files\nvcodec\NvEncoder</Filter>
     </ClInclude>
     <ClInclude Include="nvcodec\NvEncoder\NvEncoderD3D11.h">
-      <Filter>源文件\nvcodec\NvEncoder</Filter>
+      <Filter>Source Files\nvcodec\NvEncoder</Filter>
     </ClInclude>
     <ClInclude Include="external_decoder.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="external_video_decoder_factory.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="nv_encoder.h">
-      <Filter>源文件</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="jsoncpp\json_internalarray.inl">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </None>
     <None Include="jsoncpp\json_internalmap.inl">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </None>
     <None Include="jsoncpp\json_valueiterator.inl">
-      <Filter>源文件\jsoncpp</Filter>
+      <Filter>Source Files\jsoncpp</Filter>
     </None>
   </ItemGroup>
 </Project>

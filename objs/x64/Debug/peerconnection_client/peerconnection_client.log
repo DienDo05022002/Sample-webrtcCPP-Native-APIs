@@ -1,0 +1,22 @@
+﻿  conductor.cc
+  d3d9_render.cc
+  defaults.cc
+  external_decoder.cc
+  external_video_decoder_factory.cc
+  ffmpeg_video_decoder_factory.cc
+  field_trial.cc
+  json.cc
+  json_reader.cpp
+  json_value.cpp
+  json_writer.cpp
+  main.cc
+  main_wnd.cc
+  nvenc.cpp
+  NvEncoder.cpp
+  NvEncoderD3D11.cpp
+  nv_encoder.cc
+  peer_connection_client.cc
+  test_video_capturer.cc
+  vcm_capturer.cc
+  Generating Code...
+  peerconnection_client.vcxproj -> D:\Source-Code\Projects\VisualStudio\webrtc-example-1nd\webrtc-example\bin\x64\Debug\peerconnection_client\peerconnection_client.exe

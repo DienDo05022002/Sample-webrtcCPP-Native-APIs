@@ -21,7 +21,7 @@
 #include "rtc_base/third_party/sigslot/sigslot.h"
 
 typedef std::map<int, std::string> Peers;
-
+// ![1] File PeerConnectionClient.h
 struct PeerConnectionClientObserver {
   virtual void OnSignedIn() = 0;  // Called when we're logged on.
   virtual void OnDisconnected() = 0;
@@ -34,7 +34,7 @@ struct PeerConnectionClientObserver {
  protected:
   virtual ~PeerConnectionClientObserver() {}
 };
-
+// ![1]
 class PeerConnectionClient : public sigslot::has_slots<>,
                              public rtc::MessageHandler {
  public:

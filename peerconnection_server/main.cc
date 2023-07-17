@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright 2011 The WebRTC Project Authors. All rights reserved.
  *
  *  Use of this source code is governed by a BSD-style license
@@ -81,6 +81,8 @@ int main(int argc, char* argv[]) {
   // the application.
   webrtc::field_trial::InitFieldTrialsFromString(FLAG_force_fieldtrials);
 
+
+//  ### Bắt đầu tạo cổng(port)
   int port = strtol((parser.GetFlag("port")).c_str(), NULL, 10);
 
   // Abort if the user specifies a port that is outside the allowed
